@@ -1,0 +1,240 @@
+# OpenPAVE Mailchimp Skill
+# Access Mailchimp Marketing API for email campaigns, lists, and subscribers
+
+name: mailchimp
+version: 1.0.0
+description: Access Mailchimp Marketing API for email campaigns, lists, and subscribers
+
+author:
+  name: cnrai
+  url: https://github.com/cnrai
+
+license: MIT
+homepage: https://github.com/cnrai/openpave-mailchimp
+repository: cnrai/openpave-mailchimp
+
+# Execution pattern
+pattern: sandbox
+entrypoint: index.js
+
+# Available commands
+commands:
+  - name: ping
+    description: Verify API key and get account info
+    options:
+      - --dc <datacenter>
+      - --json
+      - --summary
+
+  - name: lists
+    description: List all audiences/lists
+    options:
+      - --dc <datacenter>
+      - -n, --count <number>
+      - --offset <number>
+      - --json
+      - --summary
+
+  - name: list
+    description: Get a specific list/audience details
+    args:
+      - <listId>
+    options:
+      - --dc <datacenter>
+      - --json
+      - --summary
+
+  - name: members
+    description: List members/subscribers of a list
+    args:
+      - <listId>
+    options:
+      - --dc <datacenter>
+      - -n, --count <number>
+      - --offset <number>
+      - -s, --status <status>
+      - --since <date>
+      - --json
+      - --summary
+
+  - name: member
+    description: Get a specific member by email
+    args:
+      - <listId>
+      - <email>
+    options:
+      - --dc <datacenter>
+      - --json
+      - --summary
+
+  - name: add-member
+    description: Add a new member to a list
+    args:
+      - <listId>
+      - <email>
+    options:
+      - --dc <datacenter>
+      - -s, --status <status>
+      - --fname <name>
+      - --lname <name>
+      - --tags <tags>
+      - --json
+      - --summary
+
+  - name: search
+    description: Search members across all lists
+    args:
+      - <query>
+    options:
+      - --dc <datacenter>
+      - --json
+      - --summary
+
+  - name: campaigns
+    description: List campaigns
+    options:
+      - --dc <datacenter>
+      - -n, --count <number>
+      - --offset <number>
+      - -s, --status <status>
+      - -t, --type <type>
+      - --since <date>
+      - --before <date>
+      - --json
+      - --summary
+
+  - name: campaign
+    description: Get a specific campaign
+    args:
+      - <campaignId>
+    options:
+      - --dc <datacenter>
+      - --content
+      - --json
+      - --summary
+
+  - name: report
+    description: Get campaign report/analytics
+    args:
+      - <campaignId>
+    options:
+      - --dc <datacenter>
+      - --clicks
+      - --opens
+      - --json
+      - --summary
+
+  - name: tags
+    description: List tags for a list
+    args:
+      - <listId>
+    options:
+      - --dc <datacenter>
+      - --json
+      - --summary
+
+  - name: automations
+    description: List all automations
+    options:
+      - --dc <datacenter>
+      - --json
+      - --summary
+
+# Token configuration for secure sandbox access
+tokens:
+  mailchimp:
+    type: api_key
+    description: Mailchimp API key
+    domains:
+      - "*.api.mailchimp.com"
+    env:
+      required:
+        - MAILCHIMP_API_KEY
+    config:
+      env: MAILCHIMP_API_KEY
+      type: api_key
+      domains:
+        - "*.api.mailchimp.com"
+      placement:
+        type: header
+        name: Authorization
+        format: "Bearer {token}"
+
+# Sandbox permissions
+permissions:
+  fs.read: []
+  fs.write: []
+  network:
+    - "*.api.mailchimp.com"
+  modules:
+    - fs
+    - path
+  system: []
+
+# Platform compatibility
+platforms:
+  - darwin
+  - linux
+  - win32
+
+engines:
+  node: ">=16.0.0"
+
+# Metadata
+keywords:
+  - mailchimp
+  - email
+  - marketing
+  - campaigns
+  - newsletters
+  - subscribers
+
+category: marketing
+icon: "\U0001F4E7"
+
+# Reference values
+reference:
+  member_status:
+    - subscribed
+    - unsubscribed
+    - cleaned
+    - pending
+    - transactional
+  campaign_status:
+    - save
+    - paused
+    - schedule
+    - sending
+    - sent
+  campaign_type:
+    - regular
+    - plaintext
+    - absplit
+    - rss
+    - variate
+
+# Usage examples
+examples:
+  - description: Verify API key and get account info
+    command: mailchimp ping --dc us21 --summary
+
+  - description: List all audiences
+    command: mailchimp lists --dc us21 --summary
+
+  - description: Get list details
+    command: mailchimp list b4cd77f0a4 --dc us21 --summary
+
+  - description: List subscribed members
+    command: mailchimp members b4cd77f0a4 --dc us21 --status subscribed --count 20
+
+  - description: Search for a member
+    command: mailchimp search "john@example.com" --dc us21 --summary
+
+  - description: Add a new subscriber
+    command: mailchimp add-member b4cd77f0a4 new@example.com --dc us21 --fname John --lname Doe
+
+  - description: List sent campaigns
+    command: mailchimp campaigns --dc us21 --status sent --count 10 --summary
+
+  - description: Get campaign with analytics
+    command: mailchimp report abc123 --dc us21 --clicks --opens --summary

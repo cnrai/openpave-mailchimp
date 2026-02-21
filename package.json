@@ -1,0 +1,32 @@
+{
+  "name": "openpave-mailchimp",
+  "version": "1.0.0",
+  "description": "PAVE skill for Mailchimp Marketing API",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pave",
+    "openpave",
+    "mailchimp",
+    "email",
+    "marketing",
+    "campaigns",
+    "newsletters"
+  ],
+  "author": "cnrai",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cnrai/openpave-mailchimp.git"
+  },
+  "homepage": "https://github.com/cnrai/openpave-mailchimp#readme",
+  "bugs": {
+    "url": "https://github.com/cnrai/openpave-mailchimp/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
