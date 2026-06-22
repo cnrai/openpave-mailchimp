@@ -2,7 +2,7 @@
 # Access Mailchimp Marketing API for email campaigns, lists, and subscribers
 
 name: mailchimp
-version: 1.0.0
+version: 1.1.0
 description: Access Mailchimp Marketing API for email campaigns, lists, and subscribers
 
 author:
@@ -23,7 +23,6 @@ commands:
     description: Verify API key and get account info
     options:
       - --dc <datacenter>
-      - --json
       - --summary
 
   - name: lists
@@ -32,7 +31,6 @@ commands:
       - --dc <datacenter>
       - -n, --count <number>
       - --offset <number>
-      - --json
       - --summary
 
   - name: list
@@ -41,7 +39,6 @@ commands:
       - <listId>
     options:
       - --dc <datacenter>
-      - --json
       - --summary
 
   - name: members
@@ -54,7 +51,6 @@ commands:
       - --offset <number>
       - -s, --status <status>
       - --since <date>
-      - --json
       - --summary
 
   - name: member
@@ -64,7 +60,6 @@ commands:
       - <email>
     options:
       - --dc <datacenter>
-      - --json
       - --summary
 
   - name: add-member
@@ -78,7 +73,6 @@ commands:
       - --fname <name>
       - --lname <name>
       - --tags <tags>
-      - --json
       - --summary
 
   - name: search
@@ -87,7 +81,6 @@ commands:
       - <query>
     options:
       - --dc <datacenter>
-      - --json
       - --summary
 
   - name: campaigns
@@ -100,7 +93,6 @@ commands:
       - -t, --type <type>
       - --since <date>
       - --before <date>
-      - --json
       - --summary
 
   - name: campaign
@@ -110,7 +102,6 @@ commands:
     options:
       - --dc <datacenter>
       - --content
-      - --json
       - --summary
 
   - name: report
@@ -121,7 +112,6 @@ commands:
       - --dc <datacenter>
       - --clicks
       - --opens
-      - --json
       - --summary
 
   - name: tags
@@ -130,14 +120,12 @@ commands:
       - <listId>
     options:
       - --dc <datacenter>
-      - --json
       - --summary
 
   - name: automations
     description: List all automations
     options:
       - --dc <datacenter>
-      - --json
       - --summary
 
 # Token configuration for secure sandbox access
