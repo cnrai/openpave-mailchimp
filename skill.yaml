@@ -2,7 +2,7 @@
 # Access Mailchimp Marketing API for email campaigns, lists, and subscribers
 
 name: mailchimp
-version: 1.1.0
+version: 1.1.1
 description: Access Mailchimp Marketing API for email campaigns, lists, and subscribers
 
 author:
@@ -16,6 +16,28 @@ repository: cnrai/openpave-mailchimp
 # Execution pattern
 pattern: sandbox
 entrypoint: index.js
+
+usage_notes: |
+  IMPORTANT FOR AI AGENTS:
+  
+  Cold Email Prohibition (CRITICAL):
+  - Mailchimp CANNOT be used for cold email outreach
+  - Mailchimp sends from their servers with "sent by Mailchimp" headers → Gmail flags as marketing
+  - No inbox warmup → brand new sender reputation → immediate spam
+  - TOS explicitly prohibits cold email → account suspension risk
+  - Shared IP → other users' bad behavior affects your deliverability
+  - Use dedicated cold email tools (Lemlist, Instantly) for outbound — they send through YOUR inbox
+  
+  Tag Workflow for Follow-ups:
+  - Tag subscribers as "Sent" after follow-up email is sent
+  - Tag as "Followed-up" after second follow-up
+  - Use tags to track where each subscriber is in the outreach pipeline
+  - Tag commands: `tag <listId> <email> --add "Tag Name"` and `tag <listId> <email> --remove "Tag Name"`
+  
+  Audience Management:
+  - Use free tier (500 contacts, 1K sends/mo) for nurture and waitlist only
+  - Monitor for new subscribers and alert the user
+  - Never add subscribers without consent
 
 # Available commands
 commands:
